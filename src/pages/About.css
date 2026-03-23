@@ -1,0 +1,65 @@
+.vma-item {
+    background-color: #f8f9fa;
+    /* Light background for contrast */
+    border-left: 5px solid #349fd0;
+    /* Corporate accent */
+    border-radius: 0 8px 8px 0;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vma-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.vma-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.vma-icon {
+    color: #349fd0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vma-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #349fd0;
+    margin: 0;
+}
+
+.vma-content {
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.vma-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.vma-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.vma-list li::before {
+    content: "•";
+    color: #349fd0;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+}

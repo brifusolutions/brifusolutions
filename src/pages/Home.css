@@ -1,0 +1,169 @@
+.hero {
+    padding: 0;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    /* Taller hero */
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    background: rgba(15, 23, 42, 0.7);
+    /* Dark overlay for text readability */
+    width: 100%;
+    height: 100%;
+    padding: 6rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    display: block;
+    /* Removed grid */
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    /* White text for contrast */
+    letter-spacing: -1px;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    color: #e2e8f0;
+    /* Lighter text */
+    margin: 0 auto 2.5rem auto;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Update Trust Bar to separate slightly */
+.trust-bar {
+    position: relative;
+    z-index: 2;
+    margin-top: -3rem;
+    /* Overlap effect */
+    background-color: var(--primary-color);
+    padding: 2.5rem 0;
+    border-radius: 8px;
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: var(--shadow-lg);
+}
+
+.trust-bar .container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.trust-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.trust-label {
+    color: #e2e8f0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 500px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .trust-bar {
+        margin-top: 0;
+        border-radius: 0;
+        width: 100%;
+    }
+}
+
+/* ... keep other styles ... */
+/* Services Preview */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--accent-color);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-color);
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+/* CTA */
+.cta-section {
+    background-color: var(--bg-light);
+}
+
+/* Trust Icon */
+.trust-icon {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Service Preview Card Icons */
+.service-preview-card .icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background-color: #f0f9ff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.service-preview-card:hover .icon-wrapper {
+    background-color: var(--accent-color);
+    color: white;
+    transform: scale(1.1);
+}
