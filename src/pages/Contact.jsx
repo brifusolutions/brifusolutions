@@ -1,12 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import './Contact.css';
 import PageHeader from '../components/PageHeader';
 import contactBanner from '../assets/images/contact-banner.png';
 
 const Contact = () => {
-    const form = useRef();
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
@@ -23,8 +21,8 @@ const Contact = () => {
         });
     };
 
-    // Using EmailJS for contact submission
-    const handleSubmit = (e) => {
+    // Using Nodemailer via custom Firebase Cloud Function for contact submission
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const btn = e.target.querySelector('button');
@@ -32,30 +30,29 @@ const Contact = () => {
         btn.innerText = 'Sending...';
         btn.disabled = true;
 
-        // Replace these with your actual Service ID, Template ID, and Public Key
-        // Sign up at https://www.emailjs.com/ to get them.
-        const SERVICE_ID = 'service_dr61mj5';
-        const TEMPLATE_ID = 'template_bju3g3c';
-        const PUBLIC_KEY = '_8wcpON_iv4is5M0z';
+        try {
+            // This endpoint will be handled by Firebase Hosting rewrites points to our Cloud Function
+            const response = await fetch('/api/sendEmail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
 
-        emailjs
-            .sendForm(SERVICE_ID, TEMPLATE_ID, form.current, {
-                publicKey: PUBLIC_KEY,
-            })
-            .then(
-                () => {
-                    setIsSubmitted(true);
-                    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                },
-                (error) => {
-                    console.error('FAILED...', error.text);
-                    alert('Failed to send message. Please try again or contact us directly.');
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                },
-            );
+            if (response.ok) {
+                setIsSubmitted(true);
+                setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+            } else {
+                throw new Error('Failed to send email');
+            }
+        } catch (error) {
+            console.error('FAILED...', error);
+            alert('Failed to send message. Please try again or contact us directly.');
+        } finally {
+            btn.innerText = originalText;
+            btn.disabled = false;
+        }
     };
 
 
@@ -80,7 +77,7 @@ const Contact = () => {
                             <h2>Get in Touch</h2>
                             <p>Fill out the form below and we will get back to you shortly.</p>
 
-                            <form ref={form} onSubmit={handleSubmit} className="form-group">
+                            <form onSubmit={handleSubmit} className="form-group">
                                 <input
                                     type="text"
                                     name="name"
